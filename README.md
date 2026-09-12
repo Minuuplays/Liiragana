@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # LangQuest
 
 A JavaFX desktop app for learning a new language, Duolingo-style — this instance teaches Japanese (hiragana, basic words and phrases).
@@ -19,3 +20,7 @@ src/main/java/com/langquest/
     Main.java          - application entry point
     model/              - domain classes (Kana, Word, Lesson, Exercise, UserProfile)
 ```
+=======
+# Liiragana
+Learn Hiragana with LiLii {^_^} ..
+>>>>>>> 5674982c5b6c2231ce5aa63165fbba56f9c7702c
