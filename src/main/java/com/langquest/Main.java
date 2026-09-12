@@ -1,30 +1,21 @@
 package com.langquest;
 
 import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import java.io.IOException;
 
-/**
- * Entry point for LangQuest.
- *
- * Right now this just proves the toolchain works end to end:
- * JDK -> Maven -> javafx-maven-plugin -> an actual window on screen.
- * Once this opens cleanly, we move on to the real domain model and UI.
- */
 public class Main extends Application {
 
     @Override
-    public void start(Stage stage) {
-        Label label = new Label("LangQuest is alive!");
-        label.setStyle("-fx-font-size: 18px;");
+    public void start(Stage stage) throws IOException {
+        FXMLLoader loader = new FXMLLoader(Main.class.getResource("hello-view.fxml"));
+        Parent root = loader.load();
 
-        StackPane root = new StackPane(label);
-        Scene scene = new Scene(root, 400, 300);
-
-        stage.setTitle("LangQuest - Setup Check");
-        stage.setScene(scene);
+        stage.setTitle("LangQuest");
+        stage.setScene(new Scene(root));
         stage.show();
     }
 
