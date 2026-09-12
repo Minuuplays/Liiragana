@@ -11,7 +11,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader loader = new FXMLLoader(Main.class.getResource("hello-view.fxml"));
+        FXMLLoader loader = new FXMLLoader(Main.class.getResource("main-view.fxml"));
         Parent root = loader.load();
 
         stage.setTitle("LangQuest");
