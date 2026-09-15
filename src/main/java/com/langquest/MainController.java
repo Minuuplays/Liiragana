@@ -1,12 +1,15 @@
 package com.langquest;
 
 import com.langquest.model.Lesson;
+import com.langquest.model.LessonFactory;
+import com.langquest.model.Teachable;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.layout.BorderPane;
 
 import java.io.IOException;
+import java.util.List;
 
 public class MainController {
 
@@ -39,6 +42,23 @@ public class MainController {
     @FXML
     private void showProfile() {
         loadView("profile-view.fxml");
+    }
+
+    public void loadTeachThenQuiz(String title, List<? extends Teachable> items) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("teach-view.fxml"));
+            Parent view = loader.load();
+            TeachController controller = loader.getController();
+
+            controller.startTeaching(items, () -> {
+                Lesson lesson = LessonFactory.buildLesson(title, items);
+                loadExerciseView(lesson);
+            });
+
+            rootPane.setCenter(view);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void loadExerciseView(Lesson lesson) {

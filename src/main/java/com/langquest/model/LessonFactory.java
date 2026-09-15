@@ -6,29 +6,24 @@ import java.util.List;
 
 public class LessonFactory {
 
-    /**
-     * Builds a multiple-choice lesson from a group of Gana. Each exercise
-     * shows one kana; wrong-answer options are randomly drawn from the
-     * rest of the same group.
-     */
-    public static Lesson buildLesson(String title, List<Gana> ganaGroup) {
+    public static Lesson buildLesson(String title, List<? extends Teachable> items) {
         List<Exercise> exercises = new ArrayList<>();
 
-        for (Gana correct : ganaGroup) {
+        for (Teachable correct : items) {
             List<String> distractorPool = new ArrayList<>();
-            for (Gana other : ganaGroup) {
+            for (Teachable other : items) {
                 if (!other.equals(correct)) {
-                    distractorPool.add(other.romaji());
+                    distractorPool.add(other.answer());
                 }
             }
             Collections.shuffle(distractorPool);
 
             List<String> options = new ArrayList<>();
-            options.add(correct.romaji());
+            options.add(correct.answer());
             options.addAll(distractorPool.subList(0, Math.min(2, distractorPool.size())));
             Collections.shuffle(options);
 
-            exercises.add(new Exercise(correct.character(), correct.romaji(), options));
+            exercises.add(new Exercise(correct.prompt(), correct.answer(), options));
         }
 
         return new Lesson(title, exercises);
