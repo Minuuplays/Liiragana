@@ -16,6 +16,8 @@ public class Main extends Application {
 
         stage.setTitle("LangQuest");
         stage.setScene(new Scene(root));
+        stage.setMinWidth(500);
+        stage.setMinHeight(400);
         stage.show();
     }
 

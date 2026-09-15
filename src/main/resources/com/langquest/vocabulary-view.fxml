@@ -8,5 +8,5 @@
       fx:controller="com.langquest.VocabularyController"
       spacing="10" style="-fx-padding: 20;">
     <Label text="Vocabulary" style="-fx-font-size: 18px;"/>
-    <ListView fx:id="wordListView" prefHeight="300"/>
+    <ListView fx:id="wordListView" VBox.vgrow="ALWAYS"/>
 </VBox>

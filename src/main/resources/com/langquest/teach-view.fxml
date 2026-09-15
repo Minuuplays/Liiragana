@@ -8,9 +8,12 @@
       fx:controller="com.langquest.TeachController"
       spacing="20" alignment="CENTER" style="-fx-padding: 30;">
 
-    <Label fx:id="itemLabel" style="-fx-font-size: 48px;"/>
-    <Label fx:id="hintLabel" style="-fx-font-size: 16px;"/>
-    <Label fx:id="progressLabel" style="-fx-font-size: 14px; -fx-text-fill: gray;"/>
-    <Button text="Next" onAction="#handleNext" prefWidth="100"/>
+    <VBox spacing="20" alignment="CENTER" maxWidth="Infinity"
+          style="-fx-padding: 30; -fx-border-color: #dddddd; -fx-border-radius: 8; -fx-background-radius: 8; -fx-background-color: white;">
+        <Label fx:id="itemLabel" style="-fx-font-size: 48px;"/>
+        <Label fx:id="hintLabel" style="-fx-font-size: 16px;" wrapText="true"/>
+        <Label fx:id="progressLabel" style="-fx-font-size: 14px; -fx-text-fill: gray;"/>
+        <Button text="Next" onAction="#handleNext" prefWidth="100"/>
+    </VBox>
 
 </VBox>

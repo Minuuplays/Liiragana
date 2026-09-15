@@ -10,8 +10,9 @@
 
     <Label text="Choose a Lesson" style="-fx-font-size: 18px;"/>
 
-    <ScrollPane fitToWidth="true" prefHeight="300">
-        <VBox fx:id="lessonButtonsBox" spacing="8"/>
+    <ScrollPane fitToWidth="true" VBox.vgrow="ALWAYS"
+                style="-fx-border-color: #dddddd; -fx-border-radius: 4;">
+        <VBox fx:id="lessonButtonsBox" spacing="8" style="-fx-padding: 10;"/>
     </ScrollPane>
 
 </VBox>

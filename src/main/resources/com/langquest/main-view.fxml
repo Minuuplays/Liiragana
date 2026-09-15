@@ -7,12 +7,13 @@
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="com.langquest.MainController"
             fx:id="rootPane"
-            prefWidth="550" prefHeight="400">
+            prefWidth="650" prefHeight="450">
     <left>
-        <VBox spacing="10" style="-fx-padding: 20; -fx-background-color: #e8e8e8;">
-            <Button text="Lessons" onAction="#showLessons" prefWidth="120"/>
-            <Button text="Vocabulary" onAction="#showVocabulary" prefWidth="120"/>
-            <Button text="Profile" onAction="#showProfile" prefWidth="120"/>
+        <VBox spacing="12" alignment="TOP_CENTER"
+              style="-fx-padding: 20; -fx-background-color: #e8e8e8; -fx-border-color: #cccccc; -fx-border-width: 0 1 0 0;">
+            <Button text="Lessons" onAction="#showLessons" maxWidth="Infinity"/>
+            <Button text="Vocabulary" onAction="#showVocabulary" maxWidth="Infinity"/>
+            <Button text="Profile" onAction="#showProfile" maxWidth="Infinity"/>
         </VBox>
     </left>
 </BorderPane>
