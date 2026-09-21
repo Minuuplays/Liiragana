@@ -6,11 +6,13 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import java.io.IOException;
+import com.langquest.db.DatabaseManager;
 
 public class Main extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
+        DatabaseManager.initialize();
         FXMLLoader loader = new FXMLLoader(Main.class.getResource("main-view.fxml"));
         Parent root = loader.load();
 

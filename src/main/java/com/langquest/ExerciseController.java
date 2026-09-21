@@ -13,6 +13,7 @@ import javafx.scene.layout.HBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import com.langquest.db.DatabaseManager;
 
 import java.io.IOException;
 
@@ -41,6 +42,8 @@ public class ExerciseController {
         if (currentIndex >= currentLesson.exercises().size()) {
             promptLabel.setText("Lesson complete!");
             scoreLabel.setText("Score: " + score + " / " + currentLesson.exercises().size());
+
+            DatabaseManager.recordLessonAttempt(currentLesson.title(), score);
             return;
         }
 
