@@ -26,6 +26,7 @@ public class LessonFactory {
             exercises.add(new Exercise(correct.prompt(), correct.answer(), options));
         }
 
+        Collections.shuffle(exercises);
         return new Lesson(title, exercises);
     }
 }
