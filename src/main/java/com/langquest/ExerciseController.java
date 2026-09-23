@@ -3,6 +3,7 @@ package com.langquest;
 import com.langquest.model.Exercise;
 import com.langquest.model.Lesson;
 import javafx.animation.PauseTransition;
+import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -43,7 +44,14 @@ public class ExerciseController {
             promptLabel.setText("Lesson complete!");
             scoreLabel.setText("Score: " + score + " / " + currentLesson.exercises().size());
 
-            DatabaseManager.recordLessonAttempt(currentLesson.title(), score);
+            Task<Void> saveTask = new Task<>() {
+                @Override
+                protected Void call() {
+                    DatabaseManager.recordLessonAttempt(currentLesson.title(), score);
+                    return null;
+                }
+            };
+            AppExecutor.submit(saveTask);
             return;
         }
 

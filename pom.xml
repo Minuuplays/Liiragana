@@ -44,9 +44,9 @@
 
         <!-- Gson: parses JSON lesson files / API responses into our Java objects -> covers Week 7 -->
         <dependency>
-            <groupId>com.google.code.gson</groupId>
-            <artifactId>gson</artifactId>
-            <version>2.11.0</version>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.17.2</version>
         </dependency>
         <dependency>
             <groupId>org.openjfx</groupId>

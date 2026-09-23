@@ -5,6 +5,7 @@ import com.langquest.model.CompletedLesson;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
+import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
@@ -12,6 +13,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 
+import java.util.List;
 import java.util.Optional;
 
 public class ProfileController {
@@ -62,14 +64,41 @@ public class ProfileController {
 
         Optional<ButtonType> result = confirm.showAndWait();
         if (result.isPresent() && result.get() == ButtonType.YES) {
-            DatabaseManager.deleteCompletedLesson(selected.title());
-            refreshData();
+            Task<Void> deleteTask = new Task<>() {
+                @Override
+                protected Void call() {
+                    DatabaseManager.deleteCompletedLesson(selected.title());
+                    return null;
+                }
+
+                @Override
+                protected void succeeded() {
+                    refreshData();
+                }
+            };
+            AppExecutor.submit(deleteTask);
         }
     }
 
     private void refreshData() {
-        completedTable.setItems(FXCollections.observableArrayList(
-                DatabaseManager.getCompletedLessons()));
-        xpLabel.setText("Total XP: " + DatabaseManager.getTotalXp());
+        Task<Void> task = new Task<>() {
+            private List<CompletedLesson> lessons;
+            private int xp;
+
+            @Override
+            protected Void call() {
+                lessons = DatabaseManager.getCompletedLessons();
+                xp = DatabaseManager.getTotalXp();
+                return null;
+
+            }
+
+            @Override
+            protected void succeeded() {
+                completedTable.setItems(FXCollections.observableArrayList(lessons));
+                xpLabel.setText("Total XP: " + xp);
+            }
+        };
+        AppExecutor.submit(task);
     }
 }
