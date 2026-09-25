@@ -67,7 +67,7 @@ public class ProfileController {
             Task<Void> deleteTask = new Task<>() {
                 @Override
                 protected Void call() {
-                    DatabaseManager.deleteCompletedLesson(selected.title());
+                    DatabaseManager.deleteCompletedLesson(CurrentUser.get().id(), selected.title());
                     return null;
                 }
 
@@ -87,8 +87,8 @@ public class ProfileController {
 
             @Override
             protected Void call() {
-                lessons = DatabaseManager.getCompletedLessons();
-                xp = DatabaseManager.getTotalXp();
+                lessons = DatabaseManager.getCompletedLessons(CurrentUser.get().id());
+                xp = DatabaseManager.getTotalXp(CurrentUser.get().id());
                 return null;
 
             }

@@ -10,7 +10,7 @@
            dividerPositions="0.25"
            prefWidth="650" prefHeight="450">
 
-    <VBox spacing="12" alignment="TOP_CENTER" minWidth="120" maxWidth="300"
+    <VBox spacing="12" alignment="TOP_CENTER" minWidth="150" maxWidth="250"
           style="-fx-padding: 20; -fx-background-color: #e8e8e8;">
         <Button text="Lessons" onAction="#showLessons" maxWidth="Infinity"/>
         <Button text="Vocabulary" onAction="#showVocabulary" maxWidth="Infinity"/>

@@ -47,8 +47,7 @@ public class ExerciseController {
             Task<Void> saveTask = new Task<>() {
                 @Override
                 protected Void call() {
-                    DatabaseManager.recordLessonAttempt(currentLesson.title(), score);
-                    return null;
+                    DatabaseManager.recordLessonAttempt(CurrentUser.get().id(), currentLesson.title(), score);                    return null;
                 }
             };
             AppExecutor.submit(saveTask);
@@ -95,12 +94,19 @@ public class ExerciseController {
             CorrectionDialogController controller = loader.getController();
             controller.setCorrectAnswer(correctAnswer);
 
+            Stage ownerStage = (Stage) promptLabel.getScene().getWindow();
+
             Stage dialogStage = new Stage();
             dialogStage.setTitle("Correction");
             dialogStage.setScene(new Scene(root));
             dialogStage.initModality(Modality.WINDOW_MODAL);
-            dialogStage.initOwner(promptLabel.getScene().getWindow());
+            dialogStage.initOwner(ownerStage);
             dialogStage.setResizable(false);
+
+            dialogStage.setOnShown(event -> {
+                dialogStage.setX(ownerStage.getX() + ownerStage.getWidth() / 2 - dialogStage.getWidth() / 2);
+                dialogStage.setY(ownerStage.getY() + ownerStage.getHeight() / 2 - dialogStage.getHeight() / 2);
+            });
 
             controller.setDialogStage(dialogStage);
 

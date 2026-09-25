@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.langquest.ProfileSelectController"
+      spacing="20" alignment="CENTER" style="-fx-padding: 30;">
+
+    <Label text="Who's learning?" style="-fx-font-size: 20px;"/>
+
+    <ScrollPane fitToWidth="true" prefHeight="200" maxWidth="300">
+        <VBox fx:id="userButtonsBox" spacing="8" style="-fx-padding: 10;"/>
+    </ScrollPane>
+
+    <HBox spacing="10" alignment="CENTER">
+        <TextField fx:id="newUsernameField" promptText="New username"/>
+        <Button text="Create Profile" onAction="#handleCreateProfile"/>
+    </HBox>
+
+</VBox>

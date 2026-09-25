@@ -34,10 +34,24 @@ public class Main extends Application {
 
         startupTask.setOnSucceeded(e -> {
             try {
-                Parent root = new FXMLLoader(Main.class.getResource("main-view.fxml")).load();
-                stage.setScene(new Scene(root));
-                stage.setMinWidth(500);
-                stage.setMinHeight(400);
+                FXMLLoader selectLoader = new FXMLLoader(Main.class.getResource("profile-select-view.fxml"));
+                Parent selectRoot = selectLoader.load();
+                ProfileSelectController selectController = selectLoader.getController();
+
+                selectController.setOnProfileSelected(() -> {
+                    try {
+                        Parent mainRoot = new FXMLLoader(Main.class.getResource("main-view.fxml")).load();
+                        Scene mainScene = new Scene(mainRoot);
+                        mainScene.getStylesheets().add(Main.class.getResource("style.css").toExternalForm());
+                        stage.setScene(mainScene);
+                        stage.setMinWidth(500);
+                        stage.setMinHeight(400);
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                    }
+                });
+
+                stage.setScene(new Scene(selectRoot));
             } catch (IOException ex) {
                 ex.printStackTrace();
             }
