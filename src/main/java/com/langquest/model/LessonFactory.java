@@ -13,17 +13,17 @@ public class LessonFactory {
             List<String> distractorPool = new ArrayList<>();
             for (Teachable other : items) {
                 if (!other.equals(correct)) {
-                    distractorPool.add(other.answer());
+                    distractorPool.add(other.quizOptionText());
                 }
             }
             Collections.shuffle(distractorPool);
 
             List<String> options = new ArrayList<>();
-            options.add(correct.answer());
+            options.add(correct.quizOptionText());
             options.addAll(distractorPool.subList(0, Math.min(2, distractorPool.size())));
             Collections.shuffle(options);
 
-            exercises.add(new Exercise(correct.prompt(), correct.answer(), options));
+            exercises.add(new Exercise(correct.prompt(), correct.quizOptionText(), options, correct.clue()));
         }
 
         Collections.shuffle(exercises);

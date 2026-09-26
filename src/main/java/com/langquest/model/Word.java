@@ -8,12 +8,17 @@ public record Word(String kana, String romaji, String meaning, WordCategory cate
     }
 
     @Override
-    public String answer() {
-        return romaji;
+    public String quizOptionText() {
+        return meaning;
     }
 
     @Override
     public String hint() {
         return "\"" + kana + "\" means \"" + meaning + "\" (" + romaji + ")";
+    }
+
+    @Override
+    public String clue() {
+        return romaji;
     }
 }

@@ -10,6 +10,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.Tooltip;
 import javafx.scene.layout.HBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -56,6 +57,13 @@ public class ExerciseController {
 
         Exercise exercise = currentLesson.exercises().get(currentIndex);
         promptLabel.setText(exercise.prompt());
+        if (exercise.clue() != null) {
+            Tooltip tooltip = new Tooltip(exercise.clue());
+            tooltip.setShowDelay(Duration.millis(150));
+            tooltip.setStyle("-fx-font-size: 14px; -fx-background-color: white; -fx-text-fill: black;");            promptLabel.setTooltip(tooltip);
+        } else {
+            promptLabel.setTooltip(null);
+        }
 
         for (String option : exercise.options()) {
             Button button = new Button(option);

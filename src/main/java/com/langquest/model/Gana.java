@@ -8,7 +8,7 @@ public record Gana(String character, String romaji, GanaGroup group, String audi
     }
 
     @Override
-    public String answer() {
+    public String quizOptionText() {
         return romaji;
     }
 
