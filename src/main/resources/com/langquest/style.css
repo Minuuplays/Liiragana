@@ -1,12 +1,106 @@
+.root {
+    -fx-font-family: "Segoe UI", sans-serif;
+}
+
+/* Sidebar / navigation */
+.sidebar {
+    -fx-background-color: #f7f7f7;
+    -fx-border-color: #e0e0e0;
+    -fx-border-width: 0 1 0 0;
+}
+
+.nav-button {
+    -fx-background-color: transparent;
+    -fx-text-fill: #3c3c3c;
+    -fx-font-size: 14px;
+    -fx-padding: 10;
+    -fx-background-radius: 8;
+    -fx-cursor: hand;
+}
+.nav-button:hover {
+    -fx-background-color: #e8f5e3;
+    -fx-text-fill: #58a700;
+}
+
+/* Text roles */
+.screen-title {
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #3c3c3c;
+}
+.section-header {
+    -fx-font-weight: bold;
+    -fx-padding: 10 0 0 0;
+    -fx-text-fill: #777777;
+}
+.prompt-text {
+    -fx-font-size: 48px;
+    -fx-text-fill: #3c3c3c;
+}
+.hint-text {
+    -fx-font-size: 16px;
+    -fx-text-fill: #777777;
+}
+.progress-text {
+    -fx-font-size: 14px;
+    -fx-text-fill: #aaaaaa;
+}
+.feedback-correct {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #58a700;
+}
+.feedback-incorrect {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #ea2b2b;
+}
+
+/* Cards (Teach/Exercise screens) */
+.content-card {
+    -fx-padding: 30;
+    -fx-border-color: #e0e0e0;
+    -fx-border-radius: 12;
+    -fx-background-radius: 12;
+    -fx-background-color: white;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.08), 10, 0, 2, 0);
+}
+
+/* Buttons */
+.option-button {
+    -fx-background-color: white;
+    -fx-border-color: #e0e0e0;
+    -fx-border-width: 2;
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+    -fx-padding: 10 20;
+    -fx-font-size: 16px;
+    -fx-cursor: hand;
+}
+.option-button:hover {
+    -fx-border-color: #58cc02;
+}
+.primary-button {
+    -fx-background-color: #58cc02;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-radius: 8;
+    -fx-padding: 10 24;
+    -fx-cursor: hand;
+}
+.primary-button:hover {
+    -fx-background-color: #4caf00;
+}
+
+/* Lesson-state indicators (already existed, kept as-is) */
 .lesson-completed {
     -fx-background-color: #d4edda;
     -fx-border-color: #28a745;
     -fx-border-width: 1;
 }
-
 .lesson-perfect {
     -fx-background-color: #fff3cd;
-    -fx-border-color: #d4af37;
+    -fx-border-color: #ffc800;
     -fx-border-width: 2;
     -fx-font-weight: bold;
 }

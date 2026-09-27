@@ -8,12 +8,11 @@
       fx:controller="com.langquest.ExerciseController"
       spacing="20" alignment="CENTER" style="-fx-padding: 30;">
 
-    <VBox spacing="20" alignment="CENTER" maxWidth="Infinity"
-          style="-fx-padding: 30; -fx-border-color: #dddddd; -fx-border-radius: 8; -fx-background-radius: 8; -fx-background-color: white;">
-        <Label fx:id="promptLabel" wrapText="true" style="-fx-font-size: 48px;"/>
+    <VBox spacing="20" alignment="CENTER" maxWidth="550" styleClass="content-card">
+        <Label fx:id="promptLabel" styleClass="prompt-text" wrapText="true"/>
         <HBox fx:id="optionsBox" spacing="15" alignment="CENTER"/>
-        <Label fx:id="feedbackLabel" style="-fx-font-size: 16px;"/>
-        <Label fx:id="scoreLabel" style="-fx-font-size: 14px; -fx-text-fill: gray;"/>
+        <Label fx:id="feedbackLabel"/>
+        <Label fx:id="scoreLabel" styleClass="progress-text"/>
     </VBox>
 
 </VBox>

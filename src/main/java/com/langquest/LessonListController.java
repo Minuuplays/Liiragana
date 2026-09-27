@@ -46,7 +46,7 @@ public class LessonListController {
         lessonButtonsBox.getChildren().clear();
 
         Label ganaHeader = new Label("Hiragana");
-        ganaHeader.setStyle("-fx-font-weight: bold; -fx-padding: 10 0 0 0;");
+        ganaHeader.getStyleClass().add("section-header");
         lessonButtonsBox.getChildren().add(ganaHeader);
 
         for (GanaGroup group : GanaGroup.values()) {
@@ -58,7 +58,7 @@ public class LessonListController {
         }
 
         Label wordHeader = new Label("Vocabulary");
-        wordHeader.setStyle("-fx-font-weight: bold; -fx-padding: 10 0 0 0;");
+        wordHeader.getStyleClass().add("section-header");
         lessonButtonsBox.getChildren().add(wordHeader);
 
         for (WordCategory category : WordCategory.values()) {

@@ -35,6 +35,7 @@ public class ProfileSelectController {
                 Button button = new Button(user.username());
                 button.setPrefWidth(200);
                 button.setOnAction(ev -> selectUser(user));
+                button.getStyleClass().add("option-button");
                 userButtonsBox.getChildren().add(button);
             }
         });

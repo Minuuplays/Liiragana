@@ -11,7 +11,7 @@
       fx:controller="com.langquest.ProfileSelectController"
       spacing="20" alignment="CENTER" style="-fx-padding: 30;">
 
-    <Label text="Who's learning?" style="-fx-font-size: 20px;"/>
+    <Label text="Who's learning?" styleClass="screen-title"/>
 
     <ScrollPane fitToWidth="true" prefHeight="200" maxWidth="300">
         <VBox fx:id="userButtonsBox" spacing="8" style="-fx-padding: 10;"/>
@@ -19,7 +19,7 @@
 
     <HBox spacing="10" alignment="CENTER">
         <TextField fx:id="newUsernameField" promptText="New username"/>
-        <Button text="Create Profile" onAction="#handleCreateProfile"/>
+        <Button text="Create Profile" onAction="#handleCreateProfile" styleClass="primary-button"/>
     </HBox>
 
 </VBox>

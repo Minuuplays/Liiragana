@@ -9,8 +9,8 @@
       spacing="20" alignment="CENTER" prefWidth="350"
       style="-fx-padding: 30;">
 
-    <Label text="Incorrect" style="-fx-font-size: 20px; -fx-text-fill: #c0392b;"/>
-    <Label fx:id="correctAnswerLabel" style="-fx-font-size: 16px;" wrapText="true"/>
-    <Button text="Understood" onAction="#handleUnderstood"/>
+    <Label text="Incorrect" styleClass="feedback-incorrect"/>
+    <Label fx:id="correctAnswerLabel" styleClass="hint-text" wrapText="true"/>
+    <Button text="Understood" onAction="#handleUnderstood" styleClass="primary-button"/>
 
 </VBox>

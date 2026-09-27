@@ -11,8 +11,8 @@
       fx:controller="com.langquest.ProfileController"
       spacing="15" style="-fx-padding: 20;">
 
-    <Label text="Profile" style="-fx-font-size: 18px;"/>
-    <Label fx:id="xpLabel" style="-fx-font-size: 16px;"/>
+    <Label text="Profile" styleClass="screen-title"/>
+    <Label fx:id="xpLabel" styleClass="screen-title"/>
 
     <TableView fx:id="completedTable"  VBox.vgrow="ALWAYS">
         <columns>

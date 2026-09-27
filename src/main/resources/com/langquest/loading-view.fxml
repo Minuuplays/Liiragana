@@ -6,5 +6,5 @@
 <VBox xmlns="http://javafx.com/javafx"
       spacing="20" alignment="CENTER" style="-fx-padding: 40;">
     <ProgressIndicator/>
-    <Label text="Loading LangQuest..." style="-fx-font-size: 16px;"/>
+    <Label text="Loading LangQuest..." styleClass="screen-title"/>
 </VBox>

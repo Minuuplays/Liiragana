@@ -68,6 +68,7 @@ public class ExerciseController {
         for (String option : exercise.options()) {
             Button button = new Button(option);
             button.setOnAction(e -> checkAnswer(option, exercise.correctAnswer()));
+            button.getStyleClass().add("option-button");
             optionsBox.getChildren().add(button);
         }
 
@@ -83,6 +84,7 @@ public class ExerciseController {
 
         if (selected.equals(correct)) {
             feedbackLabel.setText("Correct!");
+            feedbackLabel.getStyleClass().setAll("feedback-correct");
             score++;
 
             PauseTransition pause = new PauseTransition(Duration.seconds(1));

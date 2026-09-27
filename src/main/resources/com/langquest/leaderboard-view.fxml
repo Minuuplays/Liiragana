@@ -9,7 +9,7 @@
       fx:controller="com.langquest.LeaderboardController"
       spacing="15" style="-fx-padding: 20;">
 
-    <Label text="Leaderboard" style="-fx-font-size: 18px;"/>
+    <Label text="Leaderboard" styleClass="screen-title"/>
 
     <TableView fx:id="leaderboardTable" VBox.vgrow="ALWAYS">
         <columns>
