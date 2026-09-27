@@ -46,6 +46,9 @@ public class MainController {
         loadView("profile-view.fxml");
     }
 
+    @FXML
+    private void showLeaderboard() { loadView("leaderboard-view.fxml"); }
+
     public void loadTeachThenQuiz(String title, List<? extends Teachable> items) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("teach-view.fxml"));

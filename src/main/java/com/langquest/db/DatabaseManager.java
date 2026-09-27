@@ -1,6 +1,7 @@
 package com.langquest.db;
 
 import com.langquest.model.CompletedLesson;
+import com.langquest.model.LeaderboardEntry;
 import com.langquest.model.User;
 
 import java.sql.*;
@@ -86,6 +87,28 @@ public class DatabaseManager {
             e.printStackTrace();
         }
         return 0;
+    }
+
+    public static List<LeaderboardEntry> getLeaderboard() {
+        List<LeaderboardEntry> entries = new ArrayList<>();
+        String sql = """
+        SELECT u.username, COALESCE(SUM(cl.score), 0) * 10 AS total_xp
+        FROM users u
+        LEFT JOIN completed_lessons cl ON u.id = cl.user_id
+        GROUP BY u.id, u.username
+        ORDER BY total_xp DESC
+        """;
+        try (Connection conn = DriverManager.getConnection(DB_URL);
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(sql)) {
+
+            while (rs.next()) {
+                entries.add(new LeaderboardEntry(rs.getString("username"), rs.getInt("total_xp")));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return entries;
     }
 
     public static void recordLessonAttempt(int userId, String lessonTitle, int score) {

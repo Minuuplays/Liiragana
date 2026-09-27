@@ -15,6 +15,7 @@
         <Button text="Lessons" onAction="#showLessons" maxWidth="Infinity"/>
         <Button text="Vocabulary" onAction="#showVocabulary" maxWidth="Infinity"/>
         <Button text="Profile" onAction="#showProfile" maxWidth="Infinity"/>
+        <Button text="Leaderboard" onAction="#showLeaderboard" maxWidth="Infinity"/>
     </VBox>
 
     <StackPane fx:id="contentPane"/>
