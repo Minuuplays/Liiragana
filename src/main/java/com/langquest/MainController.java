@@ -3,6 +3,8 @@ package com.langquest;
 import com.langquest.model.Lesson;
 import com.langquest.model.LessonFactory;
 import com.langquest.model.Teachable;
+import javafx.animation.FadeTransition;
+import javafx.animation.ParallelTransition;
 import javafx.animation.TranslateTransition;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -108,10 +110,13 @@ public class MainController {
     private void setCenterWithSlide(Parent newView) {
         double distance = contentPane.getWidth() > 0 ? contentPane.getWidth() : 400;
         newView.setTranslateX(distance);
+        newView.setOpacity(0);
         contentPane.getChildren().setAll(newView);
 
         TranslateTransition slide = new TranslateTransition(Duration.millis(250), newView);
         slide.setToX(0);
-        slide.play();
+        FadeTransition fade = new FadeTransition(Duration.millis(250), newView);
+        fade.setToValue(1);
+        new ParallelTransition(slide, fade).play();
     }
 }

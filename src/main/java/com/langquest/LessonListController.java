@@ -80,6 +80,10 @@ public class LessonListController {
             button.getStyleClass().add(bestScore == items.size() ? "lesson-perfect" : "lesson-completed");
         }
 
+        Animations.addHoverScale(button);
+        if (bestScore != null) {
+            button.setText((bestScore == items.size() ? "★  " : "✓  ") + button.getText());
+        }
         lessonButtonsBox.getChildren().add(button);
     }
 

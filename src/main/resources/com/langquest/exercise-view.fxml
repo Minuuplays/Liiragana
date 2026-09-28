@@ -2,6 +2,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.ProgressBar?>
 
 <VBox xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
@@ -9,6 +10,7 @@
       spacing="20" alignment="CENTER" style="-fx-padding: 30;">
 
     <VBox spacing="20" alignment="CENTER" maxWidth="550" styleClass="content-card">
+        <ProgressBar fx:id="progressBar" progress="0" maxWidth="Infinity"/>
         <Label fx:id="promptLabel" styleClass="prompt-text" wrapText="true"/>
         <HBox fx:id="optionsBox" spacing="15" alignment="CENTER"/>
         <Label fx:id="feedbackLabel"/>
