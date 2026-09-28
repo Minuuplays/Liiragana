@@ -10,7 +10,10 @@ import javafx.scene.layout.VBox;
 
 import java.util.List;
 
-public class ProfileSelectController {
+public class ProfileSelectController extends BaseController {
+
+    @Override
+    protected String screenName() { return "Profile Picker"; }
 
     @FXML private VBox userButtonsBox;
     @FXML private TextField newUsernameField;
@@ -56,8 +59,14 @@ public class ProfileSelectController {
             }
         };
 
-        createTask.setOnSucceeded(e -> selectUser(createTask.getValue()));
-        AppExecutor.submit(createTask);
+        createTask.setOnSucceeded(e -> {
+            User created = createTask.getValue();
+            if (created == null) {
+                showError("That username is already taken.");
+            } else {
+                selectUser(created);
+            }
+        });        AppExecutor.submit(createTask);
     }
 
     private void selectUser(User user) {

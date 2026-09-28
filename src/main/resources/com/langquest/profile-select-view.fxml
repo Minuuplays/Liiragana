@@ -3,23 +3,32 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox xmlns="http://javafx.com/javafx"
-      xmlns:fx="http://javafx.com/fxml"
-      fx:controller="com.langquest.ProfileSelectController"
-      spacing="20" alignment="CENTER" style="-fx-padding: 30;">
-
-    <Label text="Who's learning?" styleClass="screen-title"/>
-
-    <ScrollPane fitToWidth="true" prefHeight="200" maxWidth="300">
-        <VBox fx:id="userButtonsBox" spacing="8" alignment="TOP_CENTER" style="-fx-padding: 10;"/>
-    </ScrollPane>
-
-    <HBox spacing="10" alignment="CENTER">
-        <TextField fx:id="newUsernameField" promptText="New username"/>
-        <Button text="Create Profile" onAction="#handleCreateProfile" styleClass="primary-button"/>
-    </HBox>
-
-</VBox>
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.langquest.ProfileSelectController"
+            style="-fx-padding: 30;">
+    <top>
+        <Label text="Who's learning?" styleClass="screen-title"
+               style="-fx-padding: 0 0 20 0;" BorderPane.alignment="CENTER"/>
+    </top>
+    <center>
+        <ScrollPane fitToWidth="true" maxWidth="300" prefHeight="200">
+            <VBox fx:id="userButtonsBox" spacing="8" alignment="TOP_CENTER" style="-fx-padding: 10;"/>
+        </ScrollPane>
+    </center>
+    <bottom>
+        <GridPane hgap="10" vgap="10" alignment="CENTER"
+                  style="-fx-padding: 20 0 0 0;" BorderPane.alignment="CENTER">
+            <Label text="New username:" styleClass="section-header"
+                   GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+            <TextField fx:id="newUsernameField"
+                       GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+            <Button text="Create Profile" onAction="#handleCreateProfile" styleClass="primary-button"
+                    GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+        </GridPane>
+    </bottom>
+</BorderPane>
