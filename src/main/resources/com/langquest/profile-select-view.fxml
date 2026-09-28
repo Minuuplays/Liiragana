@@ -16,19 +16,19 @@
                style="-fx-padding: 0 0 20 0;" BorderPane.alignment="CENTER"/>
     </top>
     <center>
-        <ScrollPane fitToWidth="true" maxWidth="300" prefHeight="200">
-            <VBox fx:id="userButtonsBox" spacing="8" alignment="TOP_CENTER" style="-fx-padding: 10;"/>
-        </ScrollPane>
+        <VBox alignment="CENTER" spacing="25">
+            <ScrollPane fitToWidth="true" maxWidth="300" prefHeight="180">
+                <VBox fx:id="userButtonsBox" spacing="8" alignment="TOP_CENTER" style="-fx-padding: 10;"/>
+            </ScrollPane>
+            <GridPane hgap="10" vgap="12" alignment="CENTER">
+                <Label text="New username:" styleClass="form-label"
+                       GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+                <TextField fx:id="newUsernameField"
+                           GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+                <Button text="Create Profile" onAction="#handleCreateProfile" styleClass="primary-button"
+                        GridPane.columnIndex="0" GridPane.rowIndex="1"
+                        GridPane.columnSpan="2" GridPane.halignment="CENTER"/>
+            </GridPane>
+        </VBox>
     </center>
-    <bottom>
-        <GridPane hgap="10" vgap="10" alignment="CENTER"
-                  style="-fx-padding: 20 0 0 0;" BorderPane.alignment="CENTER">
-            <Label text="New username:" styleClass="section-header"
-                   GridPane.columnIndex="0" GridPane.rowIndex="0"/>
-            <TextField fx:id="newUsernameField"
-                       GridPane.columnIndex="1" GridPane.rowIndex="0"/>
-            <Button text="Create Profile" onAction="#handleCreateProfile" styleClass="primary-button"
-                    GridPane.columnIndex="1" GridPane.rowIndex="1"/>
-        </GridPane>
-    </bottom>
 </BorderPane>

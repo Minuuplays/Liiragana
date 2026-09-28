@@ -83,6 +83,11 @@
     -fx-text-fill: #ea2b2b;
 }
 
+.form-label {
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+}
+
 /* Cards (Teach/Exercise screens) */
 .content-card {
     -fx-padding: 30;
