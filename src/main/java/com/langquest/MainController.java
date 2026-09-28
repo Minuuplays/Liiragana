@@ -10,6 +10,7 @@ import javafx.scene.Parent;
 import javafx.scene.layout.StackPane;
 import javafx.util.Duration;
 
+import javafx.scene.control.Button;
 import java.io.IOException;
 import java.util.List;
 
@@ -17,6 +18,10 @@ public class MainController {
 
     @FXML
     private StackPane contentPane;
+    @FXML private Button lessonsButton;
+    @FXML private Button vocabularyButton;
+    @FXML private Button profileButton;
+    @FXML private Button leaderboardButton;
 
     @FXML
     public void initialize() {
@@ -25,6 +30,7 @@ public class MainController {
 
     @FXML
     private void showLessons() {
+        setActive(lessonsButton);
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("lesson-list-view.fxml"));
             Parent view = loader.load();
@@ -38,16 +44,21 @@ public class MainController {
 
     @FXML
     private void showVocabulary() {
+        setActive(vocabularyButton);
         loadView("vocabulary-view.fxml");
     }
 
     @FXML
     private void showProfile() {
+        setActive(profileButton);
         loadView("profile-view.fxml");
     }
 
     @FXML
-    private void showLeaderboard() { loadView("leaderboard-view.fxml"); }
+    private void showLeaderboard() {
+        setActive(leaderboardButton);
+        loadView("leaderboard-view.fxml");
+    }
 
     public void loadTeachThenQuiz(String title, List<? extends Teachable> items) {
         try {
@@ -85,6 +96,13 @@ public class MainController {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private void setActive(Button active) {
+        for (Button b : List.of(lessonsButton, vocabularyButton, profileButton, leaderboardButton)) {
+            b.getStyleClass().remove("nav-button-active");
+        }
+        active.getStyleClass().add("nav-button-active");
     }
 
     private void setCenterWithSlide(Parent newView) {

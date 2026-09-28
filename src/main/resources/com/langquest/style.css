@@ -1,32 +1,59 @@
 .root {
     -fx-font-family: "Segoe UI", sans-serif;
+    -fx-background-color: linear-gradient(to bottom right, #667eea, #764ba2);
+}
+
+.split-pane {
+    -fx-background-color: transparent;
+}
+
+.content-area {
+    -fx-background-color: linear-gradient(to bottom right, #667eea, #764ba2);
+}
+
+.scroll-pane {
+    -fx-background-color: transparent;
+}
+.scroll-pane > .viewport {
+    -fx-background-color: transparent;
 }
 
 /* Sidebar / navigation */
 .sidebar {
-    -fx-background-color: #f7f7f7;
-    -fx-border-color: #e0e0e0;
+    -fx-background-color: linear-gradient(to bottom, #4b3a9c, #5c3a8c);
+    -fx-border-color: rgba(255, 255, 255, 0.2);
     -fx-border-width: 0 1 0 0;
 }
 
 .nav-button {
     -fx-background-color: transparent;
-    -fx-text-fill: #3c3c3c;
+    -fx-text-fill: white;
     -fx-font-size: 14px;
     -fx-padding: 10;
     -fx-background-radius: 8;
     -fx-cursor: hand;
 }
 .nav-button:hover {
-    -fx-background-color: #e8f5e3;
-    -fx-text-fill: #58a700;
+    -fx-background-color: rgba(255, 255, 255, 0.18);
+    -fx-text-fill: white;
+}
+.nav-button-active {
+    -fx-background-color: rgba(255, 255, 255, 0.28);
+    -fx-font-weight: bold;
+}
+.nav-button-active:hover {
+    -fx-background-color: rgba(255, 255, 255, 0.28);
 }
 
+.split-pane > .split-pane-divider {
+    -fx-background-color: rgba(255, 255, 255, 0.25);
+    -fx-padding: 0 1 0 1;
+}
 /* Text roles */
 .screen-title {
     -fx-font-size: 20px;
     -fx-font-weight: bold;
-    -fx-text-fill: #3c3c3c;
+    -fx-text-fill: white;
 }
 .section-header {
     -fx-font-weight: bold;

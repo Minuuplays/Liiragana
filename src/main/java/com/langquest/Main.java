@@ -19,7 +19,9 @@ public class Main extends Application {
     public void start(Stage stage) throws IOException {
         Parent loadingRoot = FXMLLoader.load(Main.class.getResource("loading-view.fxml"));
         stage.setTitle("LangQuest");
-        stage.setScene(new Scene(loadingRoot, 300, 150));
+        Scene loadingScene = new Scene(loadingRoot, 500, 300);
+        loadingScene.getStylesheets().add(Main.class.getResource("style.css").toExternalForm());
+        stage.setScene(loadingScene);
         stage.show();
 
         Task<Void> startupTask = new Task<>() {
@@ -41,7 +43,7 @@ public class Main extends Application {
                 selectController.setOnProfileSelected(() -> {
                     try {
                         Parent mainRoot = new FXMLLoader(Main.class.getResource("main-view.fxml")).load();
-                        Scene mainScene = new Scene(mainRoot);
+                        Scene mainScene = new Scene(mainRoot , 650, 450);
                         mainScene.getStylesheets().add(Main.class.getResource("style.css").toExternalForm());
                         stage.setScene(mainScene);
                         stage.setMinWidth(500);
@@ -51,7 +53,9 @@ public class Main extends Application {
                     }
                 });
 
-                stage.setScene(new Scene(selectRoot));
+                Scene selectScene = new Scene(selectRoot ,600 ,450);
+                selectScene.getStylesheets().add(Main.class.getResource("style.css").toExternalForm());
+                stage.setScene(selectScene);
             } catch (IOException ex) {
                 ex.printStackTrace();
             }

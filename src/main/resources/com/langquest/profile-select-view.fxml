@@ -14,7 +14,7 @@
     <Label text="Who's learning?" styleClass="screen-title"/>
 
     <ScrollPane fitToWidth="true" prefHeight="200" maxWidth="300">
-        <VBox fx:id="userButtonsBox" spacing="8" style="-fx-padding: 10;"/>
+        <VBox fx:id="userButtonsBox" spacing="8" alignment="TOP_CENTER" style="-fx-padding: 10;"/>
     </ScrollPane>
 
     <HBox spacing="10" alignment="CENTER">

@@ -12,12 +12,12 @@
 
     <VBox spacing="8" alignment="TOP_CENTER" minWidth="120" maxWidth="300"
           styleClass="sidebar" style="-fx-padding: 20;">
-        <Button text="Lessons" onAction="#showLessons" maxWidth="Infinity" styleClass="nav-button"/>
-        <Button text="Vocabulary" onAction="#showVocabulary" maxWidth="Infinity" styleClass="nav-button"/>
-        <Button text="Profile" onAction="#showProfile" maxWidth="Infinity" styleClass="nav-button"/>
-        <Button text="Leaderboard" onAction="#showLeaderboard" maxWidth="Infinity" styleClass="nav-button"/>
+        <Button fx:id="lessonsButton" text="Lessons" onAction="#showLessons" maxWidth="Infinity" styleClass="nav-button"/>
+        <Button fx:id="vocabularyButton" text="Vocabulary" onAction="#showVocabulary" maxWidth="Infinity" styleClass="nav-button"/>
+        <Button fx:id="profileButton" text="Profile" onAction="#showProfile" maxWidth="Infinity" styleClass="nav-button"/>
+        <Button fx:id="leaderboardButton" text="Leaderboard" onAction="#showLeaderboard" maxWidth="Infinity" styleClass="nav-button"/>
     </VBox>
 
-    <StackPane fx:id="contentPane"/>
+    <StackPane fx:id="contentPane" styleClass="content-area"/>
 
 </SplitPane>
