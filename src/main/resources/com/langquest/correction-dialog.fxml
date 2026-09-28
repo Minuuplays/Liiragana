@@ -6,8 +6,8 @@
 <VBox xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
       fx:controller="com.langquest.CorrectionDialogController"
-      spacing="20" alignment="CENTER" prefWidth="350"
-      style="-fx-padding: 30;">
+      spacing="20" alignment="CENTER" prefWidth="350" prefHeight="200"
+      styleClass="dialog-root">
 
     <Label text="Incorrect" styleClass="feedback-incorrect"/>
     <Label fx:id="correctAnswerLabel" styleClass="hint-text" wrapText="true"/>

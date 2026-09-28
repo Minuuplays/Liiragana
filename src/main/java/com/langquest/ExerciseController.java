@@ -1,8 +1,13 @@
 package com.langquest;
 
+import com.langquest.db.DatabaseManager;
 import com.langquest.model.Exercise;
 import com.langquest.model.Lesson;
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
 import javafx.animation.PauseTransition;
+import javafx.animation.Timeline;
+import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -10,17 +15,18 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.control.Tooltip;
 import javafx.scene.layout.HBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import com.langquest.db.DatabaseManager;
 
 import java.io.IOException;
 
 public class ExerciseController {
 
+    @FXML private ProgressBar progressBar;
     @FXML private Label promptLabel;
     @FXML private HBox optionsBox;
     @FXML private Label feedbackLabel;
@@ -41,14 +47,21 @@ public class ExerciseController {
         feedbackLabel.setText("");
         optionsBox.getChildren().clear();
 
-        if (currentIndex >= currentLesson.exercises().size()) {
-            promptLabel.setText("Lesson complete!");
-            scoreLabel.setText("Score: " + score + " / " + currentLesson.exercises().size());
+        int total = currentLesson.exercises().size();
+        animateProgress((double) currentIndex / total);
+
+        if (currentIndex >= total) {
+            boolean perfect = score == total;
+            promptLabel.setTooltip(null);
+            promptLabel.setText(perfect ? "Perfect!  ★" : "Lesson complete!");
+            scoreLabel.setText("Score: " + score + " / " + total);
+            Animations.pop(promptLabel);
 
             Task<Void> saveTask = new Task<>() {
                 @Override
                 protected Void call() {
-                    DatabaseManager.recordLessonAttempt(CurrentUser.get().id(), currentLesson.title(), score);                    return null;
+                    DatabaseManager.recordLessonAttempt(CurrentUser.get().id(), currentLesson.title(), score);
+                    return null;
                 }
             };
             AppExecutor.submit(saveTask);
@@ -57,27 +70,36 @@ public class ExerciseController {
 
         Exercise exercise = currentLesson.exercises().get(currentIndex);
         promptLabel.setText(exercise.prompt());
+        Animations.pop(promptLabel);
+        Animations.pop(optionsBox);
+
         if (exercise.clue() != null) {
             Tooltip tooltip = new Tooltip(exercise.clue());
             tooltip.setShowDelay(Duration.millis(150));
-            tooltip.setStyle("-fx-font-size: 14px; -fx-background-color: white; -fx-text-fill: black;");            promptLabel.setTooltip(tooltip);
+            tooltip.setStyle("-fx-font-size: 14px; -fx-background-color: white; -fx-text-fill: black;");
+            promptLabel.setTooltip(tooltip);
         } else {
             promptLabel.setTooltip(null);
         }
 
         for (String option : exercise.options()) {
             Button button = new Button(option);
-            button.setOnAction(e -> checkAnswer(option, exercise.correctAnswer()));
             button.getStyleClass().add("option-button");
+            button.setOnAction(e -> checkAnswer(button, option, exercise.correctAnswer()));
+            Animations.addHoverScale(button);
             optionsBox.getChildren().add(button);
         }
 
-        scoreLabel.setText("Question " + (currentIndex + 1) + " of " + currentLesson.exercises().size());
+        scoreLabel.setText("Question " + (currentIndex + 1) + " of " + total);
     }
 
-    private void checkAnswer(String selected, String correct) {
+    private void checkAnswer(Button clicked, String selected, String correct) {
         for (var node : optionsBox.getChildren()) {
             node.setDisable(true);
+            Button b = (Button) node;
+            if (b.getText().equals(correct)) {
+                b.getStyleClass().add("option-correct");
+            }
         }
 
         currentIndex++;
@@ -91,9 +113,18 @@ public class ExerciseController {
             pause.setOnFinished(e -> showExercise());
             pause.play();
         } else {
-            showCorrectionDialog(correct);
-            showExercise(); // only runs once the dialog is closed — see explanation below
+            clicked.getStyleClass().add("option-wrong");
+            Animations.shake(promptLabel.getParent(), () ->
+                    Platform.runLater(() -> {
+                        showCorrectionDialog(correct);
+                        showExercise();
+                    }));
         }
+    }
+
+    private void animateProgress(double target) {
+        new Timeline(new KeyFrame(Duration.millis(350),
+                new KeyValue(progressBar.progressProperty(), target))).play();
     }
 
     private void showCorrectionDialog(String correctAnswer) {
@@ -106,9 +137,12 @@ public class ExerciseController {
 
             Stage ownerStage = (Stage) promptLabel.getScene().getWindow();
 
+            Scene dialogScene = new Scene(root);
+            dialogScene.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
+
             Stage dialogStage = new Stage();
             dialogStage.setTitle("Correction");
-            dialogStage.setScene(new Scene(root));
+            dialogStage.setScene(dialogScene);
             dialogStage.initModality(Modality.WINDOW_MODAL);
             dialogStage.initOwner(ownerStage);
             dialogStage.setResizable(false);
@@ -119,7 +153,6 @@ public class ExerciseController {
             });
 
             controller.setDialogStage(dialogStage);
-
             dialogStage.showAndWait();
         } catch (IOException e) {
             e.printStackTrace();

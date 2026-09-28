@@ -131,3 +131,32 @@
     -fx-border-width: 2;
     -fx-font-weight: bold;
 }
+/* Quiz answer feedback */
+.option-correct, .option-correct:disabled {
+    -fx-background-color: #d7ffb8;
+    -fx-border-color: #58cc02;
+    -fx-opacity: 1;
+}
+.option-wrong, .option-wrong:disabled {
+    -fx-background-color: #ffdfe0;
+    -fx-border-color: #ea2b2b;
+    -fx-opacity: 1;
+}
+
+/* Progress bar */
+.progress-bar > .track {
+    -fx-background-color: #e5e5e5;
+    -fx-background-radius: 10;
+    -fx-background-insets: 0;
+}
+.progress-bar > .bar {
+    -fx-background-color: #58cc02;
+    -fx-background-radius: 10;
+    -fx-background-insets: 0;
+    -fx-padding: 6;
+}
+
+/* Correction dialog stays a clean white card */
+.dialog-root {
+    -fx-background-color: white;
+}
