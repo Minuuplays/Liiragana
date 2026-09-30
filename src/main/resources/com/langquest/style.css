@@ -1,6 +1,14 @@
+/* =========================================================
+   GLOBAL
+   ========================================================= */
+
 .root {
     -fx-font-family: "Segoe UI", sans-serif;
-    -fx-background-color: linear-gradient(to bottom right, #667eea, #764ba2);
+    -fx-background-color: linear-gradient(
+            to bottom right,
+            #667eea,
+            #764ba2
+    );
 }
 
 .split-pane {
@@ -8,79 +16,124 @@
 }
 
 .content-area {
-    -fx-background-color: linear-gradient(to bottom right, #667eea, #764ba2);
+    -fx-background-color: linear-gradient(
+            to bottom right,
+            #667eea,
+            #764ba2
+    );
 }
 
 .scroll-pane {
     -fx-background-color: transparent;
+    -fx-background-insets: 0;
+    -fx-padding: 0;
 }
+
 .scroll-pane > .viewport {
     -fx-background-color: transparent;
 }
 
-/* Sidebar / navigation */
+
+/* =========================================================
+   SIDEBAR / NAVIGATION
+   ========================================================= */
+
 .sidebar {
-    -fx-background-color: linear-gradient(to bottom, #4b3a9c, #5c3a8c);
-    -fx-border-color: rgba(255, 255, 255, 0.2);
+    -fx-background-color: linear-gradient(
+            to bottom,
+            #46358f,
+            #553681
+    );
+
+    -fx-border-color: rgba(255, 255, 255, 0.12);
     -fx-border-width: 0 1 0 0;
+
+    -fx-effect: dropshadow(
+            gaussian,
+            rgba(0, 0, 0, 0.18),
+            12,
+            0.2,
+            3,
+            0
+    );
 }
 
 .nav-button {
     -fx-background-color: transparent;
-    -fx-text-fill: white;
+    -fx-text-fill: rgba(255, 255, 255, 0.88);
     -fx-font-size: 14px;
-    -fx-padding: 10;
-    -fx-background-radius: 8;
+    -fx-font-weight: 500;
+
+    -fx-padding: 11 14;
+    -fx-background-radius: 10;
+    -fx-border-radius: 10;
+
     -fx-cursor: hand;
 }
+
 .nav-button:hover {
-    -fx-background-color: rgba(255, 255, 255, 0.18);
+    -fx-background-color: rgba(255, 255, 255, 0.14);
     -fx-text-fill: white;
-}
-.nav-button-active {
-    -fx-background-color: rgba(255, 255, 255, 0.28);
-    -fx-font-weight: bold;
-}
-.nav-button-active:hover {
-    -fx-background-color: rgba(255, 255, 255, 0.28);
 }
 
+.nav-button:pressed {
+    -fx-background-color: rgba(255, 255, 255, 0.22);
+}
+
+.nav-button-active {
+    -fx-background-color: rgba(255, 255, 255, 0.20);
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+
+    -fx-border-color: rgba(255, 255, 255, 0.10);
+    -fx-border-width: 1;
+}
+
+.nav-button-active:hover {
+    -fx-background-color: rgba(255, 255, 255, 0.24);
+}
+
+
+/* Split pane divider */
+
 .split-pane > .split-pane-divider {
-    -fx-background-color: rgba(255, 255, 255, 0.25);
+    -fx-background-color: rgba(255, 255, 255, 0.18);
     -fx-padding: 0 1 0 1;
 }
-/* Text roles */
+
+
+/* =========================================================
+   TEXT
+   ========================================================= */
+
 .screen-title {
-    -fx-font-size: 20px;
+    -fx-font-size: 22px;
     -fx-font-weight: bold;
     -fx-text-fill: white;
 }
+
 .section-header {
+    -fx-font-size: 16px;
     -fx-font-weight: bold;
     -fx-padding: 10 0 0 0;
-    -fx-text-fill: #777777;
+    -fx-text-fill: #4a4a5a;
 }
+
 .prompt-text {
     -fx-font-size: 48px;
-    -fx-text-fill: #3c3c3c;
+    -fx-font-weight: bold;
+    -fx-text-fill: #292938;
 }
+
 .hint-text {
     -fx-font-size: 16px;
-    -fx-text-fill: #777777;
+    -fx-text-fill: #77778a;
 }
+
 .progress-text {
     -fx-font-size: 14px;
-    -fx-text-fill: #aaaaaa;
-}
-.feedback-correct {
-    -fx-font-size: 16px;
-    -fx-font-weight: bold;
-    -fx-text-fill: #58a700;
-}
-.feedback-incorrect {
-    -fx-font-size: 16px;
-    -fx-font-weight: bold;
-    -fx-text-fill: #ea2b2b;
+    -fx-font-weight: 600;
+    -fx-text-fill: #85859a;
 }
 
 .form-label {
@@ -88,80 +141,331 @@
     -fx-font-weight: bold;
 }
 
-/* Cards (Teach/Exercise screens) */
-.content-card {
-    -fx-padding: 30;
-    -fx-border-color: #e0e0e0;
-    -fx-border-radius: 12;
-    -fx-background-radius: 12;
-    -fx-background-color: white;
-    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.08), 10, 0, 2, 0);
+
+/* =========================================================
+   FEEDBACK
+   ========================================================= */
+
+.feedback-correct {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #43a047;
 }
 
-/* Buttons */
+.feedback-incorrect {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #e53935;
+}
+
+
+/* =========================================================
+   CARDS
+   ========================================================= */
+
+.content-card {
+    -fx-padding: 30;
+
+    -fx-background-color: white;
+
+    -fx-background-radius: 16;
+    -fx-border-radius: 16;
+
+    -fx-border-color: rgba(80, 70, 130, 0.10);
+    -fx-border-width: 1;
+
+    -fx-effect: dropshadow(
+            gaussian,
+            rgba(35, 25, 70, 0.15),
+            18,
+            0.18,
+            0,
+            5
+    );
+}
+
+
+/* Slightly more prominent cards */
+
+.content-card:hover {
+    -fx-effect: dropshadow(
+            gaussian,
+            rgba(35, 25, 70, 0.20),
+            22,
+            0.20,
+            0,
+            7
+    );
+}
+
+
+/* =========================================================
+   ANSWER / OPTION BUTTONS
+   ========================================================= */
+
 .option-button {
     -fx-background-color: white;
-    -fx-border-color: #e0e0e0;
+
+    -fx-border-color: #dedee8;
     -fx-border-width: 2;
-    -fx-border-radius: 8;
-    -fx-background-radius: 8;
-    -fx-padding: 10 20;
+
+    -fx-border-radius: 12;
+    -fx-background-radius: 12;
+
+    -fx-padding: 12 22;
+
     -fx-font-size: 16px;
+    -fx-font-weight: 500;
+
+    -fx-text-fill: #343445;
+
     -fx-cursor: hand;
 }
+
 .option-button:hover {
-    -fx-border-color: #58cc02;
+    -fx-background-color: #faf9ff;
+    -fx-border-color: #7c6ee6;
+
+    -fx-effect: dropshadow(
+            gaussian,
+            rgba(100, 85, 200, 0.18),
+            8,
+            0.15,
+            0,
+            2
+    );
 }
+
+.option-button:pressed {
+    -fx-background-color: #f1efff;
+    -fx-border-color: #6655d9;
+}
+
+
+/* =========================================================
+   PRIMARY BUTTON
+   ========================================================= */
+
 .primary-button {
     -fx-background-color: #58cc02;
     -fx-text-fill: white;
+
+    -fx-font-size: 15px;
     -fx-font-weight: bold;
-    -fx-background-radius: 8;
-    -fx-padding: 10 24;
+
+    -fx-background-radius: 12;
+    -fx-border-radius: 12;
+
+    -fx-padding: 11 26;
+
     -fx-cursor: hand;
+
+    -fx-effect: dropshadow(
+            gaussian,
+            rgba(55, 150, 0, 0.25),
+            8,
+            0.15,
+            0,
+            3
+    );
 }
+
 .primary-button:hover {
+    -fx-background-color: #61d609;
+
+    -fx-effect: dropshadow(
+            gaussian,
+            rgba(55, 150, 0, 0.35),
+            10,
+            0.18,
+            0,
+            4
+    );
+}
+
+.primary-button:pressed {
     -fx-background-color: #4caf00;
 }
 
-/* Lesson-state indicators (already existed, kept as-is) */
-.lesson-completed {
-    -fx-background-color: #d4edda;
-    -fx-border-color: #28a745;
+
+/* =========================================================
+   SECONDARY BUTTON
+   ========================================================= */
+
+.secondary-button {
+    -fx-background-color: rgba(255, 255, 255, 0.15);
+
+    -fx-text-fill: white;
+
+    -fx-border-color: rgba(255, 255, 255, 0.35);
     -fx-border-width: 1;
+
+    -fx-background-radius: 10;
+    -fx-border-radius: 10;
+
+    -fx-padding: 10 22;
+
+    -fx-cursor: hand;
 }
-.lesson-perfect {
-    -fx-background-color: #fff3cd;
-    -fx-border-color: #ffc800;
-    -fx-border-width: 2;
-    -fx-font-weight: bold;
+
+.secondary-button:hover {
+    -fx-background-color: rgba(255, 255, 255, 0.24);
 }
-/* Quiz answer feedback */
-.option-correct, .option-correct:disabled {
-    -fx-background-color: #d7ffb8;
+
+
+/* =========================================================
+   QUIZ ANSWER STATES
+   ========================================================= */
+
+.option-correct,
+.option-correct:disabled {
+
+    -fx-background-color: #dfffc7;
     -fx-border-color: #58cc02;
-    -fx-opacity: 1;
-}
-.option-wrong, .option-wrong:disabled {
-    -fx-background-color: #ffdfe0;
-    -fx-border-color: #ea2b2b;
+    -fx-border-width: 2;
+
+    -fx-text-fill: #286b00;
+
     -fx-opacity: 1;
 }
 
-/* Progress bar */
+.option-wrong,
+.option-wrong:disabled {
+
+    -fx-background-color: #ffe2e3;
+    -fx-border-color: #ea2b2b;
+    -fx-border-width: 2;
+
+    -fx-text-fill: #a51d1d;
+
+    -fx-opacity: 1;
+}
+
+
+/* =========================================================
+   LESSON STATES
+   ========================================================= */
+
+.lesson-completed {
+    -fx-background-color: #e2f7e7;
+
+    -fx-border-color: #28a745;
+    -fx-border-width: 1;
+
+    -fx-background-radius: 12;
+    -fx-border-radius: 12;
+}
+
+.lesson-perfect {
+    -fx-background-color: #fff5cf;
+
+    -fx-border-color: #ffc800;
+    -fx-border-width: 2;
+
+    -fx-background-radius: 12;
+    -fx-border-radius: 12;
+
+    -fx-font-weight: bold;
+}
+
+
+/* =========================================================
+   PROGRESS BAR
+   ========================================================= */
+
+.progress-bar {
+    -fx-pref-height: 12;
+}
+
 .progress-bar > .track {
-    -fx-background-color: #e5e5e5;
-    -fx-background-radius: 10;
+    -fx-background-color: rgba(255, 255, 255, 0.30);
+
+    -fx-background-radius: 20;
     -fx-background-insets: 0;
 }
+
 .progress-bar > .bar {
     -fx-background-color: #58cc02;
-    -fx-background-radius: 10;
+
+    -fx-background-radius: 20;
     -fx-background-insets: 0;
+
     -fx-padding: 6;
 }
 
-/* Correction dialog stays a clean white card */
+
+/* =========================================================
+   WHITE CARD PROGRESS BAR
+   ========================================================= */
+
+.content-card .progress-bar > .track {
+    -fx-background-color: #e8e8ef;
+}
+
+.content-card .progress-bar > .bar {
+    -fx-background-color: #58cc02;
+}
+
+
+/* =========================================================
+   DIALOG
+   ========================================================= */
+
 .dialog-root {
     -fx-background-color: white;
+
+    -fx-background-radius: 16;
+    -fx-border-radius: 16;
+
+    -fx-effect: dropshadow(
+            gaussian,
+            rgba(0, 0, 0, 0.25),
+            20,
+            0.2,
+            0,
+            5
+    );
+}
+
+
+/* =========================================================
+   SCROLLBAR
+   ========================================================= */
+
+.scroll-bar:vertical {
+    -fx-background-color: transparent;
+    -fx-padding: 2;
+}
+
+.scroll-bar:vertical .track {
+    -fx-background-color: transparent;
+}
+
+.scroll-bar:vertical .thumb {
+    -fx-background-color: rgba(255, 255, 255, 0.35);
+    -fx-background-radius: 10;
+}
+
+.scroll-bar:vertical .thumb:hover {
+    -fx-background-color: rgba(255, 255, 255, 0.55);
+}
+
+.scroll-bar:horizontal {
+    -fx-background-color: transparent;
+}
+
+
+/* =========================================================
+   FOCUS
+   ========================================================= */
+
+.button:focused {
+    -fx-effect: dropshadow(
+            gaussian,
+            rgba(124, 110, 230, 0.45),
+            8,
+            0.2,
+            0,
+            0
+    );
 }
