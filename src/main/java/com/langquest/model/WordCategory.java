@@ -6,5 +6,13 @@ public enum WordCategory {
     FAMILY,
     NUMBER,
     SEASON,
-    ADJECTIVE
+    ADJECTIVE,
+    VERB,
+    COLOR,
+    ANIMAL,
+    FOOD,
+    BODY_PART,
+    TIME,
+    WEATHER,
+    PLACE
 }
