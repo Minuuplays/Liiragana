@@ -5,26 +5,30 @@ import java.util.List;
 
 public class LessonCatalog {
 
-    public record LessonDefinition(String title, int itemCount, boolean isHiragana) {}
+    public record LessonDefinition(String title, List<? extends Teachable> items, boolean isHiragana) {
+        public int itemCount() {
+            return items.size();
+        }
+    }
 
     public static List<LessonDefinition> getAllLessons() {
         List<LessonDefinition> lessons = new ArrayList<>();
 
         for (GanaGroup group : GanaGroup.values()) {
-            long count = HiraganaData.getAllHiragana().stream()
+            List<Gana> items = HiraganaData.getAllHiragana().stream()
                     .filter(g -> g.group() == group)
-                    .count();
-            if (count > 0) {
-                lessons.add(new LessonDefinition(formatEnumName(group.name()), (int) count, true));
+                    .toList();
+            if (!items.isEmpty()) {
+                lessons.add(new LessonDefinition(formatEnumName(group.name()), items, true));
             }
         }
 
         for (WordCategory category : WordCategory.values()) {
-            long count = WordData.getAllWords().stream()
+            List<Word> items = WordData.getAllWords().stream()
                     .filter(w -> w.category() == category)
-                    .count();
-            if (count > 0) {
-                lessons.add(new LessonDefinition(formatEnumName(category.name()), (int) count, false));
+                    .toList();
+            if (!items.isEmpty()) {
+                lessons.add(new LessonDefinition(formatEnumName(category.name()), items, false));
             }
         }
 

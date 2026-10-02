@@ -5,10 +5,13 @@ import com.langquest.model.CompletedLesson;
 import com.langquest.model.LessonCatalog;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
+import javafx.scene.chart.PieChart;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
+import javafx.stage.Stage;
 
 import java.util.List;
 import java.util.Optional;
@@ -26,7 +29,16 @@ public class ProfileController {
     @FXML private Label vocabValueLabel;
     @FXML private ProgressBar vocabProgressBar;
 
+    @FXML private Label continueLessonTitleLabel;
+    @FXML private Button continueLessonButton;
+    @FXML private PieChart masteryChart;
+    @FXML private Label gettingStartedBadge;
+    @FXML private Label hiraganaMasterBadge;
+    @FXML private Label vocabMasterBadge;
+    @FXML private Label perfectionistBadge;
+
     private MainController mainController;
+    private LessonCatalog.LessonDefinition nextLesson;
 
     public void setMainController(MainController mainController) {
         this.mainController = mainController;
@@ -35,7 +47,10 @@ public class ProfileController {
     private record ProfileStats(int totalXp, int lessonsCompleted, int totalLessons,
                                 int hiraganaCompleted, int hiraganaTotal,
                                 int vocabCompleted, int vocabTotal,
-                                int wordsLearned) {}
+                                int wordsLearned,
+                                LessonCatalog.LessonDefinition nextLesson,
+                                boolean gettingStarted, boolean hiraganaMaster,
+                                boolean vocabMaster, boolean perfectionist) {}
 
     @FXML
     public void initialize() {
@@ -49,6 +64,13 @@ public class ProfileController {
     }
 
     @FXML
+    private void handleContinueLearning() {
+        if (nextLesson != null) {
+            mainController.loadTeachThenQuiz(nextLesson.title(), nextLesson.items());
+        }
+    }
+
+    @FXML
     private void handleDeleteProfile() {
         Alert firstConfirm = new Alert(
                 Alert.AlertType.CONFIRMATION,
@@ -58,6 +80,7 @@ public class ProfileController {
         firstConfirm.setTitle("Delete Profile");
         firstConfirm.setHeaderText(null);
 
+        Animations.shakeOnFocusLoss((Stage) firstConfirm.getDialogPane().getScene().getWindow(), firstConfirm.getDialogPane());
         Optional<ButtonType> first = firstConfirm.showAndWait();
         if (first.isEmpty() || first.get() != ButtonType.YES) return;
 
@@ -69,6 +92,7 @@ public class ProfileController {
         secondConfirm.setTitle("Final Confirmation");
         secondConfirm.setHeaderText(null);
 
+        Animations.shakeOnFocusLoss((Stage) secondConfirm.getDialogPane().getScene().getWindow(), secondConfirm.getDialogPane());
         Optional<ButtonType> second = secondConfirm.showAndWait();
         if (second.isEmpty() || second.get() != ButtonType.YES) return;
 
@@ -115,13 +139,31 @@ public class ProfileController {
                     if (isDone) wordsLearned += lesson.itemCount();
                 }
 
+                LessonCatalog.LessonDefinition next = allLessons.stream()
+                        .filter(l -> !completedTitles.contains(l.title()))
+                        .findFirst()
+                        .orElse(null);
+
+                boolean gettingStarted = !completed.isEmpty();
+                boolean hiraganaMaster = hiraganaTotal > 0 && hiraganaDone == hiraganaTotal;
+                boolean vocabMaster = vocabTotal > 0 && vocabDone == vocabTotal;
+
+                boolean perfectionist = gettingStarted && completed.stream().allMatch(cl ->
+                        allLessons.stream()
+                                .filter(l -> l.title().equals(cl.title()))
+                                .findFirst()
+                                .map(l -> cl.score() == l.itemCount())
+                                .orElse(false));
+
                 return new ProfileStats(xp, completedTitles.size(), allLessons.size(),
-                        hiraganaDone, hiraganaTotal, vocabDone, vocabTotal, wordsLearned);
+                        hiraganaDone, hiraganaTotal, vocabDone, vocabTotal, wordsLearned,
+                        next, gettingStarted, hiraganaMaster, vocabMaster, perfectionist);
             }
 
             @Override
             protected void succeeded() {
                 ProfileStats stats = getValue();
+                nextLesson = stats.nextLesson();
 
                 xpValueLabel.setText(String.valueOf(stats.totalXp()));
                 lessonsValueLabel.setText(stats.lessonsCompleted() + " / " + stats.totalLessons());
@@ -134,6 +176,26 @@ public class ProfileController {
                 vocabValueLabel.setText(stats.vocabCompleted() + " / " + stats.vocabTotal());
                 vocabProgressBar.setProgress(stats.vocabTotal() == 0 ? 0 :
                         (double) stats.vocabCompleted() / stats.vocabTotal());
+
+                if (stats.nextLesson() != null) {
+                    continueLessonTitleLabel.setText(stats.nextLesson().title());
+                    continueLessonButton.setVisible(true);
+                    continueLessonButton.setManaged(true);
+                } else {
+                    continueLessonTitleLabel.setText("You've completed every lesson! 🎉");
+                    continueLessonButton.setVisible(false);
+                    continueLessonButton.setManaged(false);
+                }
+
+                masteryChart.getData().setAll(
+                        new PieChart.Data("Completed", stats.lessonsCompleted()),
+                        new PieChart.Data("Remaining", stats.totalLessons() - stats.lessonsCompleted())
+                );
+
+                gettingStartedBadge.getStyleClass().setAll(stats.gettingStarted() ? "badge-earned" : "badge-locked");
+                hiraganaMasterBadge.getStyleClass().setAll(stats.hiraganaMaster() ? "badge-earned" : "badge-locked");
+                vocabMasterBadge.getStyleClass().setAll(stats.vocabMaster() ? "badge-earned" : "badge-locked");
+                perfectionistBadge.getStyleClass().setAll(stats.perfectionist() ? "badge-earned" : "badge-locked");
             }
         };
 

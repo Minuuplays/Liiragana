@@ -6,6 +6,7 @@ import javafx.animation.ParallelTransition;
 import javafx.animation.ScaleTransition;
 import javafx.animation.TranslateTransition;
 import javafx.scene.Node;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 
 public class Animations {
@@ -49,5 +50,13 @@ public class Animations {
             onFinished.run();
         });
         shake.play();
+    }
+
+    public static void shakeOnFocusLoss(Stage modalStage, Node nodeToShake) {
+        modalStage.focusedProperty().addListener((obs, wasFocused, isFocused) -> {
+            if (!isFocused && modalStage.isShowing()) {
+                shake(nodeToShake, modalStage::requestFocus);
+            }
+        });
     }
 }

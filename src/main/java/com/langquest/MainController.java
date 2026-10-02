@@ -50,7 +50,7 @@ public class MainController {
     }
 
     @FXML
-    private void showLessons() {
+    public void showLessons() {
         setActive(lessonsButton);
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("lesson-list-view.fxml"));

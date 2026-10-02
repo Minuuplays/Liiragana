@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.chart.PieChart?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ProgressBar?>
@@ -42,6 +43,26 @@
     </HBox>
 
     <Button text="Lesson History" onAction="#handleViewHistory" styleClass="option-button"/>
+
+    <VBox styleClass="stat-card" spacing="10">
+        <Label text="Continue Learning" styleClass="stat-label"/>
+        <Label fx:id="continueLessonTitleLabel" styleClass="stat-value-small" wrapText="true"/>
+        <Button fx:id="continueLessonButton" text="Start" onAction="#handleContinueLearning" styleClass="primary-button"/>
+    </VBox>
+
+    <HBox spacing="15">
+        <VBox styleClass="stat-card" alignment="CENTER" spacing="6" HBox.hgrow="ALWAYS">
+            <Label text="Overall Progress" styleClass="stat-label"/>
+            <PieChart fx:id="masteryChart" legendVisible="true" labelsVisible="false" prefHeight="200" maxHeight="200"/>
+        </VBox>
+        <VBox styleClass="stat-card" spacing="10" HBox.hgrow="ALWAYS">
+            <Label text="Achievements" styleClass="stat-label"/>
+            <Label fx:id="gettingStartedBadge" text="🌱  Getting Started" styleClass="badge-locked"/>
+            <Label fx:id="hiraganaMasterBadge" text="🈴  Hiragana Master" styleClass="badge-locked"/>
+            <Label fx:id="vocabMasterBadge" text="📖  Vocabulary Master" styleClass="badge-locked"/>
+            <Label fx:id="perfectionistBadge" text="💯  Perfectionist" styleClass="badge-locked"/>
+        </VBox>
+    </HBox>
 
     <Region VBox.vgrow="ALWAYS"/>
 

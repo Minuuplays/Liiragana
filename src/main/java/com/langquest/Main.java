@@ -15,8 +15,12 @@ import java.io.IOException;
 
 public class Main extends Application {
 
+    private Stage primaryStage;
+
     @Override
     public void start(Stage stage) throws IOException {
+        this.primaryStage = stage;
+
         Parent loadingRoot = FXMLLoader.load(Main.class.getResource("loading-view.fxml"));
         stage.setTitle("LangQuest");
         Scene loadingScene = new Scene(loadingRoot, 500, 300);
@@ -34,36 +38,43 @@ public class Main extends Application {
             }
         };
 
-        startupTask.setOnSucceeded(e -> {
-            try {
-                FXMLLoader selectLoader = new FXMLLoader(Main.class.getResource("profile-select-view.fxml"));
-                Parent selectRoot = selectLoader.load();
-                ProfileSelectController selectController = selectLoader.getController();
-
-                selectController.setOnProfileSelected(() -> {
-                    try {
-                        Parent mainRoot = new FXMLLoader(Main.class.getResource("main-view.fxml")).load();
-                        Scene mainScene = new Scene(mainRoot , 650, 450);
-                        mainScene.getStylesheets().add(Main.class.getResource("style.css").toExternalForm());
-                        stage.setScene(mainScene);
-                        stage.setMinWidth(500);
-                        stage.setMinHeight(400);
-                    } catch (IOException ex) {
-                        ex.printStackTrace();
-                    }
-                });
-
-                Scene selectScene = new Scene(selectRoot ,600 ,450);
-                selectScene.getStylesheets().add(Main.class.getResource("style.css").toExternalForm());
-                stage.setScene(selectScene);
-            } catch (IOException ex) {
-                ex.printStackTrace();
-            }
-        });
-
+        startupTask.setOnSucceeded(e -> showProfileSelect());
         startupTask.setOnFailed(e -> startupTask.getException().printStackTrace());
 
         AppExecutor.submit(startupTask);
+    }
+
+    private void showProfileSelect() {
+        try {
+            FXMLLoader selectLoader = new FXMLLoader(Main.class.getResource("profile-select-view.fxml"));
+            Parent selectRoot = selectLoader.load();
+            ProfileSelectController selectController = selectLoader.getController();
+
+            selectController.setOnProfileSelected(this::showMainApp);
+
+            Scene selectScene = new Scene(selectRoot, 600, 450);
+            selectScene.getStylesheets().add(Main.class.getResource("style.css").toExternalForm());
+            primaryStage.setScene(selectScene);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    private void showMainApp() {
+        try {
+            FXMLLoader mainLoader = new FXMLLoader(Main.class.getResource("main-view.fxml"));
+            Parent mainRoot = mainLoader.load();
+            MainController mainController = mainLoader.getController();
+            mainController.setOnProfileDeleted(this::showProfileSelect);
+
+            Scene mainScene = new Scene(mainRoot, 650, 450);
+            mainScene.getStylesheets().add(Main.class.getResource("style.css").toExternalForm());
+            primaryStage.setScene(mainScene);
+            primaryStage.setMinWidth(500);
+            primaryStage.setMinHeight(400);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
     }
 
     public static void main(String[] args) {
