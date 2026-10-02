@@ -4,20 +4,24 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<SplitPane xmlns="http://javafx.com/javafx"
+<StackPane xmlns="http://javafx.com/javafx"
            xmlns:fx="http://javafx.com/fxml"
            fx:controller="com.langquest.MainController"
-           dividerPositions="0.25"
            prefWidth="650" prefHeight="450">
 
-    <VBox spacing="8" alignment="TOP_CENTER" minWidth="120" maxWidth="300"
-          styleClass="sidebar" style="-fx-padding: 20;">
-        <Button fx:id="lessonsButton" text="Lessons" onAction="#showLessons" maxWidth="Infinity" styleClass="nav-button"/>
-        <Button fx:id="vocabularyButton" text="Vocabulary" onAction="#showVocabulary" maxWidth="Infinity" styleClass="nav-button"/>
-        <Button fx:id="profileButton" text="Profile" onAction="#showProfile" maxWidth="Infinity" styleClass="nav-button"/>
-        <Button fx:id="leaderboardButton" text="Leaderboard" onAction="#showLeaderboard" maxWidth="Infinity" styleClass="nav-button"/>
-    </VBox>
+    <SplitPane dividerPositions="0.25">
+        <VBox spacing="8" alignment="TOP_CENTER" minWidth="120" maxWidth="300"
+              styleClass="sidebar" style="-fx-padding: 20;">
+            <Button fx:id="lessonsButton" text="Lessons" onAction="#showLessons" maxWidth="Infinity" styleClass="nav-button"/>
+            <Button fx:id="vocabularyButton" text="Vocabulary" onAction="#showVocabulary" maxWidth="Infinity" styleClass="nav-button"/>
+            <Button fx:id="profileButton" text="Profile" onAction="#showProfile" maxWidth="Infinity" styleClass="nav-button"/>
+            <Button fx:id="leaderboardButton" text="Leaderboard" onAction="#showLeaderboard" maxWidth="Infinity" styleClass="nav-button"/>
+        </VBox>
 
-    <StackPane fx:id="contentPane" styleClass="content-area"/>
+        <StackPane fx:id="contentPane" styleClass="content-area"/>
+    </SplitPane>
 
-</SplitPane>
+    <VBox fx:id="toastLayer" StackPane.alignment="BOTTOM_RIGHT" alignment="TOP_RIGHT" mouseTransparent="true" spacing="8"
+          style="-fx-padding: 20 20 30 0;"/>
+
+</StackPane>

@@ -1,5 +1,6 @@
 package com.langquest.db;
 
+import com.langquest.model.AttemptResult;
 import com.langquest.model.CompletedLesson;
 import com.langquest.model.LeaderboardEntry;
 import com.langquest.model.User;
@@ -111,7 +112,7 @@ public class DatabaseManager {
         return entries;
     }
 
-    public static void recordLessonAttempt(int userId, String lessonTitle, int score) {
+    public static AttemptResult recordLessonAttempt(int userId, String lessonTitle, int score) {
         String selectSql = "SELECT score FROM completed_lessons WHERE user_id = ? AND lesson_title = ?";
         String insertSql = "INSERT INTO completed_lessons (user_id, lesson_title, score, completed_at) VALUES (?, ?, ?, ?)";
         String updateSql = "UPDATE completed_lessons SET score = ?, completed_at = ? WHERE user_id = ? AND lesson_title = ?";
@@ -135,6 +136,8 @@ public class DatabaseManager {
                     ps.setString(4, java.time.LocalDateTime.now().toString());
                     ps.executeUpdate();
                 }
+                return AttemptResult.FIRST_ATTEMPT;
+
             } else if (score > existingScore) {
                 try (PreparedStatement ps = conn.prepareStatement(updateSql)) {
                     ps.setInt(1, score);
@@ -143,11 +146,14 @@ public class DatabaseManager {
                     ps.setString(4, lessonTitle);
                     ps.executeUpdate();
                 }
+                return AttemptResult.IMPROVED;
             }
-            // else: not an improvement — no changes.
+
+            return AttemptResult.NO_IMPROVEMENT;
 
         } catch (SQLException e) {
             e.printStackTrace();
+            return AttemptResult.NO_IMPROVEMENT;
         }
     }
 

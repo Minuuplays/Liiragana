@@ -10,6 +10,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 
 import javafx.scene.control.Button;
@@ -24,10 +25,19 @@ public class MainController {
     @FXML private Button vocabularyButton;
     @FXML private Button profileButton;
     @FXML private Button leaderboardButton;
+    @FXML private VBox toastLayer;
 
     @FXML
     public void initialize() {
+        ToastManager.register(toastLayer);
         showLessons();
+
+        String name = CurrentUser.get().username();
+        if (CurrentUser.wasNewlyCreated()) {
+            ToastManager.show("Welcome, " + name + "! Profile created.", ToastType.CREATED);
+        } else {
+            ToastManager.show("Welcome back, " + name + "!", ToastType.WELCOME);
+        }
     }
 
     @FXML

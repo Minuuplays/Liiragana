@@ -37,7 +37,7 @@ public class ProfileSelectController extends BaseController {
             for (User user : loadUsers.getValue()) {
                 Button button = new Button(user.username());
                 button.setPrefWidth(200);
-                button.setOnAction(ev -> selectUser(user));
+                button.setOnAction(ev -> selectUser(user, false));
                 button.getStyleClass().add("option-button");
                 Animations.addHoverScale(button);
                 userButtonsBox.getChildren().add(button);
@@ -64,13 +64,13 @@ public class ProfileSelectController extends BaseController {
             if (created == null) {
                 showError("That username is already taken.");
             } else {
-                selectUser(created);
+                selectUser(created,true);
             }
         });        AppExecutor.submit(createTask);
     }
 
-    private void selectUser(User user) {
-        CurrentUser.set(user);
+    private void selectUser(User user, boolean isNew) {
+        CurrentUser.set(user, isNew);
         if (onProfileSelected != null) onProfileSelected.run();
     }
 }

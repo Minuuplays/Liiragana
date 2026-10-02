@@ -1,6 +1,7 @@
 package com.langquest;
 
 import com.langquest.db.DatabaseManager;
+import com.langquest.model.AttemptResult;
 import com.langquest.model.Exercise;
 import com.langquest.model.Lesson;
 import javafx.animation.KeyFrame;
@@ -57,13 +58,20 @@ public class ExerciseController {
             scoreLabel.setText("Score: " + score + " / " + total);
             Animations.pop(promptLabel);
 
-            Task<Void> saveTask = new Task<>() {
+            Task<AttemptResult> saveTask = new Task<>() {
                 @Override
-                protected Void call() {
-                    DatabaseManager.recordLessonAttempt(CurrentUser.get().id(), currentLesson.title(), score);
-                    return null;
+                protected AttemptResult call() {
+                    return DatabaseManager.recordLessonAttempt(CurrentUser.get().id(), currentLesson.title(), score);
                 }
             };
+            saveTask.setOnSucceeded(e -> {
+                AttemptResult result = saveTask.getValue();
+                if (result == AttemptResult.FIRST_ATTEMPT) {
+                    ToastManager.show("+" + (score * 10) + " XP!", ToastType.XP);
+                } else if (result == AttemptResult.IMPROVED) {
+                    ToastManager.show("New personal best!", ToastType.BEST);
+                }
+            });
             AppExecutor.submit(saveTask);
             return;
         }
