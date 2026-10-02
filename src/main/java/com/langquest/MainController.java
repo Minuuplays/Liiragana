@@ -9,23 +9,32 @@ import javafx.animation.TranslateTransition;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 
-import javafx.scene.control.Button;
 import java.io.IOException;
 import java.util.List;
 
 public class MainController {
 
-    @FXML
-    private StackPane contentPane;
+    @FXML private StackPane contentPane;
+    @FXML private VBox toastLayer;
     @FXML private Button lessonsButton;
     @FXML private Button vocabularyButton;
     @FXML private Button profileButton;
     @FXML private Button leaderboardButton;
-    @FXML private VBox toastLayer;
+
+    private Runnable onProfileDeleted;
+
+    public void setOnProfileDeleted(Runnable callback) {
+        this.onProfileDeleted = callback;
+    }
+
+    public void returnToProfileSelect() {
+        if (onProfileDeleted != null) onProfileDeleted.run();
+    }
 
     @FXML
     public void initialize() {
@@ -63,13 +72,25 @@ public class MainController {
     @FXML
     private void showProfile() {
         setActive(profileButton);
-        loadView("profile-view.fxml");
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("profile-view.fxml"));
+            Parent view = loader.load();
+            ProfileController controller = loader.getController();
+            controller.setMainController(this);
+            setCenterWithSlide(view);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
     private void showLeaderboard() {
         setActive(leaderboardButton);
         loadView("leaderboard-view.fxml");
+    }
+
+    public void loadLessonHistory() {
+        loadView("lesson-history-view.fxml");
     }
 
     public void loadTeachThenQuiz(String title, List<? extends Teachable> items) {
