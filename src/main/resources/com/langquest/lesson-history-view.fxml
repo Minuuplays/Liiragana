@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.langquest.LessonHistoryController"
+      spacing="15" style="-fx-padding: 20;">
+
+    <Label text="Lesson History" styleClass="screen-title"/>
+
+    <TableView fx:id="completedTable" VBox.vgrow="ALWAYS">
+        <columns>
+            <TableColumn fx:id="lessonColumn" text="Lesson" prefWidth="200"/>
+            <TableColumn fx:id="scoreColumn" text="Score" prefWidth="80"/>
+            <TableColumn fx:id="dateColumn" text="Completed At" prefWidth="200"/>
+        </columns>
+    </TableView>
+
+    <HBox spacing="10">
+        <Button text="Delete Selected" onAction="#handleDelete" styleClass="option-button"/>
+        <Button text="Refresh" onAction="#handleRefresh" styleClass="option-button"/>
+    </HBox>
+
+</VBox>

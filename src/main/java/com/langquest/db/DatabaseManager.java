@@ -189,4 +189,22 @@ public class DatabaseManager {
             e.printStackTrace();
         }
     }
+
+    public static void deleteUser(int userId) {
+        String deleteLessonsSql = "DELETE FROM completed_lessons WHERE user_id = ?";
+        String deleteUserSql = "DELETE FROM users WHERE id = ?";
+
+        try (Connection conn = DriverManager.getConnection(DB_URL)) {
+            try (PreparedStatement ps = conn.prepareStatement(deleteLessonsSql)) {
+                ps.setInt(1, userId);
+                ps.executeUpdate();
+            }
+            try (PreparedStatement ps = conn.prepareStatement(deleteUserSql)) {
+                ps.setInt(1, userId);
+                ps.executeUpdate();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }
