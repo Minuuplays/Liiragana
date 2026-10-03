@@ -42,15 +42,20 @@
         </VBox>
     </HBox>
 
-    <Button text="Lesson History" onAction="#handleViewHistory" styleClass="option-button"/>
-
-    <VBox styleClass="stat-card" spacing="10">
-        <Label text="Continue Learning" styleClass="stat-label"/>
-        <Label fx:id="continueLessonTitleLabel" styleClass="stat-value-small" wrapText="true"/>
-        <Button fx:id="continueLessonButton" text="Start" onAction="#handleContinueLearning" styleClass="primary-button"/>
-    </VBox>
-
     <HBox spacing="15">
+        <VBox styleClass="stat-card" spacing="10" HBox.hgrow="ALWAYS">
+            <Label text="Continue Learning" styleClass="stat-label"/>
+            <Label fx:id="continueLessonTitleLabel" styleClass="stat-value-small" wrapText="true"/>
+            <Button fx:id="continueLessonButton" text="Start" onAction="#handleContinueLearning" styleClass="primary-button"/>
+        </VBox>
+        <VBox alignment="BOTTOM_RIGHT" HBox.hgrow="ALWAYS">
+            <Button text="Lesson History"  onAction="#handleViewHistory" styleClass="option-button"/>
+        </VBox>
+
+    </HBox>
+
+
+    <HBox spacing="10">
         <VBox styleClass="stat-card" alignment="CENTER" spacing="6" HBox.hgrow="ALWAYS">
             <Label text="Overall Progress" styleClass="stat-label"/>
             <PieChart fx:id="masteryChart" legendVisible="true" labelsVisible="false" prefHeight="200" maxHeight="200"/>
@@ -64,10 +69,15 @@
         </VBox>
     </HBox>
 
-    <Region VBox.vgrow="ALWAYS"/>
-
-    <HBox alignment="CENTER_RIGHT">
+    <HBox spacing="15" >
+        <VBox alignment="TOP_LEFT" HBox.hgrow="ALWAYS">
+        <Button text="Log Out" onAction="#handleLogout" styleClass="logout-button"/>
+        </VBox>
+        <VBox alignment="CENTER_RIGHT" HBox.hgrow="ALWAYS">
         <Button text="Delete Profile" onAction="#handleDeleteProfile" styleClass="danger-button"/>
+        </VBox>
     </HBox>
+
+    <Region VBox.vgrow="ALWAYS"/>
 
 </VBox>

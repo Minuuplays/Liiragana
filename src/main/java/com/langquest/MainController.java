@@ -26,14 +26,14 @@ public class MainController {
     @FXML private Button profileButton;
     @FXML private Button leaderboardButton;
 
-    private Runnable onProfileDeleted;
+    private Runnable onReturnToProfileSelect;
 
-    public void setOnProfileDeleted(Runnable callback) {
-        this.onProfileDeleted = callback;
+    public void setOnProfileSelect(Runnable callback) {
+        this.onReturnToProfileSelect = callback;
     }
 
     public void returnToProfileSelect() {
-        if (onProfileDeleted != null) onProfileDeleted.run();
+        if (onReturnToProfileSelect != null) onReturnToProfileSelect.run();
     }
 
     @FXML

@@ -52,11 +52,7 @@ public class Animations {
         shake.play();
     }
 
-    public static void shakeOnFocusLoss(Stage modalStage, Node nodeToShake) {
-        modalStage.focusedProperty().addListener((obs, wasFocused, isFocused) -> {
-            if (!isFocused && modalStage.isShowing()) {
-                shake(nodeToShake, modalStage::requestFocus);
-            }
-        });
+    public static void shakeOnShow(Stage dialogStage, Node nodeToShake) {
+        dialogStage.setOnShown(event -> shake(nodeToShake, () -> {}));
     }
 }

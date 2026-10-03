@@ -65,9 +65,9 @@ public class Main extends Application {
             FXMLLoader mainLoader = new FXMLLoader(Main.class.getResource("main-view.fxml"));
             Parent mainRoot = mainLoader.load();
             MainController mainController = mainLoader.getController();
-            mainController.setOnProfileDeleted(this::showProfileSelect);
+            mainController.setOnProfileSelect(this::showProfileSelect);
 
-            Scene mainScene = new Scene(mainRoot, 650, 450);
+            Scene mainScene = new Scene(mainRoot, 980, 620);
             mainScene.getStylesheets().add(Main.class.getResource("style.css").toExternalForm());
             primaryStage.setScene(mainScene);
             primaryStage.setMinWidth(500);

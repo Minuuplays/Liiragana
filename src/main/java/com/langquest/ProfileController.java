@@ -71,6 +71,23 @@ public class ProfileController {
     }
 
     @FXML
+    private void handleLogout() {
+        Alert confirm = new Alert(
+                Alert.AlertType.CONFIRMATION,
+                "Log out of this profile?",
+                ButtonType.YES, ButtonType.NO
+        );
+        confirm.setTitle("Confirm Logout");
+        confirm.setHeaderText(null);
+
+        Animations.shakeOnShow((Stage) confirm.getDialogPane().getScene().getWindow(), confirm.getDialogPane());
+        Optional<ButtonType> result = confirm.showAndWait();
+        if (result.isPresent() && result.get() == ButtonType.YES) {
+            mainController.returnToProfileSelect();
+        }
+    }
+
+    @FXML
     private void handleDeleteProfile() {
         Alert firstConfirm = new Alert(
                 Alert.AlertType.CONFIRMATION,
@@ -80,7 +97,7 @@ public class ProfileController {
         firstConfirm.setTitle("Delete Profile");
         firstConfirm.setHeaderText(null);
 
-        Animations.shakeOnFocusLoss((Stage) firstConfirm.getDialogPane().getScene().getWindow(), firstConfirm.getDialogPane());
+        Animations.shakeOnShow((Stage) firstConfirm.getDialogPane().getScene().getWindow(), firstConfirm.getDialogPane());
         Optional<ButtonType> first = firstConfirm.showAndWait();
         if (first.isEmpty() || first.get() != ButtonType.YES) return;
 
@@ -92,7 +109,7 @@ public class ProfileController {
         secondConfirm.setTitle("Final Confirmation");
         secondConfirm.setHeaderText(null);
 
-        Animations.shakeOnFocusLoss((Stage) secondConfirm.getDialogPane().getScene().getWindow(), secondConfirm.getDialogPane());
+        Animations.shakeOnShow((Stage) secondConfirm.getDialogPane().getScene().getWindow(), secondConfirm.getDialogPane());
         Optional<ButtonType> second = secondConfirm.showAndWait();
         if (second.isEmpty() || second.get() != ButtonType.YES) return;
 

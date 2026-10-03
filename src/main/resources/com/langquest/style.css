@@ -525,6 +525,18 @@
     -fx-background-color: #c41e1e;
 }
 
+.logout-button {
+    -fx-background-color: #eb1b2b;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-radius: 8;
+    -fx-padding: 10 24;
+    -fx-cursor: hand;
+}
+.logout-button:hover {
+    -fx-background-color: #d41e1e;
+}
+
 .badge-locked {
     -fx-background-color: #f0f0f0;
     -fx-text-fill: #aaaaaa;
